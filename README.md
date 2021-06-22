@@ -8,7 +8,7 @@ In order to experience the beauty of intelligent code prediction, there is no ne
 This plugin uses a very powerful implementation of a T5 plugin to perform code and comment completion. The suggestions coming from the neural network will directly appear in the text-editor.
 If you are not satisfied with the predictions coming from my model, you can easily deploy your own model on a server and specify the url in the plugin settings.
 
-![A usage scenario of the plugin](images/example.gif)
+![A usage scenario of the plugin](https://github.com/Matteo-Omenetti/S.I.M.O.N./blob/main/images/example.gif)
 
 
 ## Extension Settings
