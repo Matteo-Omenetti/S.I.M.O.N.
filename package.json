@@ -3,7 +3,8 @@
   "displayName": "S.I.M.O.N.",
   "description": "integrate your own java code prediction models in Vscode",
   "publisher": "Matteo-Omenetti",
-  "version": "0.0.19",
+  "repository": "https://github.com/Matteo-Omenetti/S.I.M.O.N.",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.54.0"
   },
