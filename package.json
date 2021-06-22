@@ -1,0 +1,162 @@
+{
+  "name": "simon",
+  "displayName": "S.I.M.O.N.",
+  "description": "integrate your own java code prediction models in Vscode",
+  "publisher": "Matteo-Omenetti",
+  "version": "0.0.19",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:java",
+    "onCommand:simon.autocomplete"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "java",
+        "extensions": [
+          ".java"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "simon.autocomplete",
+        "title": "Show the Suggestion"
+      },
+      {
+        "command": "simon.delete",
+        "title": "Delete the Suggestion"
+      },
+      {
+        "command": "simon.accept",
+        "title": "Accept the Suggestion"
+      }
+    ],
+    "configuration": {
+      "title": "S.I.M.O.N.",
+      "properties": {
+        "simon.urlCode": {
+          "type": "array",
+          "default": [
+            {
+              "enable": true,
+              "url": "http://gym.si.usi.ch:45001/code/"
+            }
+          ],
+          "description": "The server hosting the neural network that makes code recommendations. (If multiple objects are given with enable=true, the first one will be considered)"
+        },
+        "simon.urlComment": {
+          "type": "array",
+          "default": [
+            {
+              "enable": true,
+              "url": "http://gym.si.usi.ch:45001/comment/"
+            }
+          ],
+          "description": "The server hosting the neural network that makes comment recommendations. (If multiple objects are given with enable=true, the first one will be considered)"
+        },
+        "simon.triggerChars": {
+          "type": "array",
+          "default": [
+            " ",
+            ".",
+            ",",
+            "("
+          ],
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "markdownDescription": "Specifies the characters for which the autocompletion will be triggered",
+          "scope": "window"
+        },
+        "simon.name": {
+          "type": "string",
+          "default": null,
+          "markdownDescription": "Insert your organization name when requesting a recommendation",
+          "scope": "window"
+        },
+        "simon.urlFeedback": {
+          "type": "string",
+          "default": "http://gym.si.usi.ch:45002/feedback/",
+          "markdownDescription": "The server hosting the feeback database",
+          "scope": "window"
+        },
+        "simon.suggestionColor": {
+          "type": "string",
+          "default": "#505050",
+          "markdownDescription": "Specify the color of the suggestion in hexadecimal. Depending on the color theme you are using the defualt one could not be visible.",
+          "scope": "window"
+        },
+        "simon.confidenceCode": {
+          "type": "number",
+          "default": 75,
+          "minimum": 0,
+          "maximum": 100,
+          "markdownDescription": "Specify the minimum confidence that the code neural network must have in order for a recommendation to be shown. If the confidence for the current prediction is below the specified number, it will not be shown",
+          "scope": "window"
+        },
+        "simon.confidenceComment": {
+          "type": "number",
+          "default": 75,
+          "minimum": 0,
+          "maximum": 100,
+          "markdownDescription": "Specify the minimum confidence that the comment neural network must have in order for a recommendation to be shown. If the confidence for the current prediction is below the specified number, it will not be shown",
+          "scope": "window"
+        },
+        "simon.singleLineComment": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "If a single line comment on the same line of some code is decteded, move the comment to a new line, when the code is sent to the neural network.",
+          "scope": "window"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "simon.delete",
+        "key": "escape",
+        "mac": "escape",
+        "when": "myContext == true"
+      },
+      {
+        "command": "simon.accept",
+        "key": "tab",
+        "mac": "tab",
+        "when": "myContext == true"
+      },
+      {
+        "command": "simon.trigger",
+        "key": "ctrl+space",
+        "mac": "ctrl+space"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "@types/vscode": "^1.54.0",
+    "eslint": "^7.19.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.2.1",
+    "typescript": "^4.1.3",
+    "vscode-test": "^1.5.0"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
